@@ -27,7 +27,7 @@ Route::get('/1',
     }
 )->name('start1');
 
-Route::get('/{var1}/{var2}/{var3}',
+Route::get('/exec/{var1}/{var2}/{var3}',
     function($var1,$var2,$var3){
         return view('mainpage',[
             'title'=> $var1,
@@ -145,6 +145,9 @@ Route::get('students_data',
 
 //直接使用模型專用的控制器，呼叫方法，並由控制器決定回應的內容
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+use App\Models\Teacher;
+
 Route::get('students_data1',
     [StudentController::class,'getAll']
 );
@@ -183,6 +186,14 @@ Route::get('deleteStudentByName/{name1}',
     [StudentController::class,'deleteStudentByName']
 );
 
+
+Route::get('t-sys',
+    function() {
+        return redirect()->route('teachers.index');
+    }
+);
+
+Route::resource('teachers' , TeacherController::class);
 
 // Route::get('/', function () {
 //     return view('welcome');

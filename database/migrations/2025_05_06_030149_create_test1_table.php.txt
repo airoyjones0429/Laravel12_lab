@@ -1,0 +1,118 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('test1', function (Blueprint $table) {
+            $table->id(); //增加 id 欄位，為 8 bytes 的自動遞增整數
+            //=== 以下是   有正負號   數值  整數  宣告方式
+            $table->tinyInteger('qty1');    //增加 qty1 欄位，1 byte
+            $table->smallInteger('qty2');   //增加 qty2 欄位，2 byte
+            $table->mediumInteger('qty3');  //增加 qty3 欄位，3 byte
+            $table->bigInteger('qty4');     //增加 qty4 欄位，4 byte
+
+            //=== 以下是   無正負號   數值  整數  宣告方式
+            $table->tinyInteger('qty12',false,true);    //增加 qty12 欄位，1 byte
+            $table->smallInteger('qty22',0,1);          //增加 qty22 欄位，2 byte
+            $table->mediumInteger('qty32',0,1);         //增加 qty32 欄位，3 byte
+            $table->bigInteger('qty42',0,1);            //增加 qty42 欄位，4 byte
+
+            //=== 以下是字串宣告方式
+            $table->string('str1');//字串，預設長度為 255
+            $table->text('text');//長字串
+            $table->mediumText('medtext');//中型長字串
+            $table->longText('lngtext');//長長字串
+
+            //=== 以下是浮點數
+            $table->float('float1');//浮點數
+            $table->double('double1');//雙精度浮點數
+            $table->decimal('decimal1');//十進位數，通常用於金額
+
+            //=== 布林型
+            $table->boolean('bool1');//布林值（真或假）
+
+            //=== 日期和時間型
+            $table->date('date1');//日期
+            $table->time('time1');//時間
+            $table->dateTime('dateTime1');//日期和時間 這個方法不存在
+            $table->softDeletes();//用於軟刪除的時間戳記
+
+            //=== 其他資料類型
+            $table->json('json1');//JSON 格式的資料
+            $table->jsonb('jsonb1');//二進位 JSON 格式的資料（在 PostgreSQL 中使用）。
+            $table->binary('binary1');//二進位資料
+            $table->enum('type', ['1','2','3','4','5','a','ab']);//列舉型別，允許指定的值集合，建議用字串
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('test1');
+    }
+};
+
+
+// Schema::create('test1', function (Blueprint $table) {
+//     $table->id();
+
+//     //=== 以下是數值宣告方式
+//     // $table->integer('age',true);//自動遞增的整數  不能接受，這裡的 true
+//     // $table->increments('iid');//自動遞增的整數主鍵  自動遞增欄位只能有一個
+    
+//     // $table->tinyIncrements('ttinyId') ; //自動遞增的小整數  自動遞增欄位只能有一個
+//     // $table->tinyInteger('tinyId',true); //自動遞增的小整數  不能接受，這裡的 true
+//     $table->tinyInteger('tinyId2'); //小整數
+    
+//     // $table->smallIncrements('ssid'); //自動遞增的小型整數  自動遞增欄位只能有一個
+//     // $table->smallInteger('sid',true); //自動遞增的小型整數  不能接受，這裡的 true
+//     $table->smallInteger('sid2'); //小型整數
+    
+//     // $table->mediumIncrements('mmid'); //自動遞增的中型整數  自動遞增欄位只能有一個
+//     // $table->mediumInteger('mid',true); //自動遞增的中型整數  不能接受，這裡的 true
+//     $table->mediumInteger('mid2'); //中型整數
+    
+//     // $table->bigIncrements('bbid');//自動遞增的大整數  自動遞增欄位只能有一個
+//     // $table->bigInteger('bid',true);//自動遞增的大整數  不能接受，這裡的 true
+//     $table->bigInteger('bid2');//大整數
+
+//     //=== 以下是字串宣告方式
+//     $table->string('str1');//字串，預設長度為 255
+//     $table->text('text');//長字串
+//     $table->mediumText('medtext');//中型長字串
+//     $table->longText('lngtext');//長長字串
+
+//     //=== 以下是浮點數
+//     $table->float('float1');//浮點數
+//     $table->double('double1');//雙精度浮點數
+//     $table->decimal('decimal1');//十進位數，通常用於金額
+
+//     //=== 布林型
+//     $table->boolean('bool1');//布林值（真或假）
+
+//     //=== 日期和時間型
+//     $table->date('date1');//日期
+//     $table->time('time1');//時間
+//     $table->dateTime('dateTime1');//日期和時間 這個方法不存在
+//     $table->softDeletes();//用於軟刪除的時間戳記
+
+//     //=== 其他資料類型
+//     $table->json('json1');//JSON 格式的資料
+//     $table->jsonb('jsonb1');//二進位 JSON 格式的資料（在 PostgreSQL 中使用）。
+//     $table->binary('binary1');//二進位資料
+//     $table->enum('type', ['1','2','3','4','5','a','ab']);//列舉型別，允許指定的值集合，建議用字串
+
+//     $table->timestamps();
+// });
