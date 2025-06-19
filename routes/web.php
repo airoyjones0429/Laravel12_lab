@@ -30,7 +30,6 @@ Route::post('', function () {
         
 //登入路由
 Route::get('/login',[AuthController::class, 'showLoginForm'])->name('login.form');
-
 //執行登入動作路由
 Route::post('/login',[AuthController::class, 'login'] )->name('login');
 
